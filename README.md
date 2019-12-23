@@ -1,4 +1,4 @@
-# gitq
+# gitQ
 
 github application
 
@@ -26,4 +26,9 @@ flutter run
 # json to models
 # `json/*.json` => `lib/models/*.dart`
 ./bin/jtm.sh
+```
+
+```bash
+# app icon
+flutter pub run flutter_launcher_icons:main
 ```

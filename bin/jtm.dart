@@ -83,8 +83,8 @@ void jtm(srcDir, distDir) {
     } else {
       // json file directories recursively
       if (FileSystemEntity.isDirectorySync(f.path)) {
-        final dirs = f.path.split('$SRC');
-        jtm(f.path, '$distDir' + dirs[1]);
+        final dirs = f.path.split(SRC);
+        jtm(f.path, '$distDir${dirs[1]}');
       }
     }
   });
@@ -102,15 +102,14 @@ String changeToCamelCase(String word, bool big) {
     return big ? result : (result[0].toLowerCase() + result.substring(1));
   } else {
     return big
-        ? word[0].toUpperCase() + word.substring(1)
-        : word[0].toLowerCase() + word.substring(1);
+      ? word[0].toUpperCase() + word.substring(1)
+      : word[0].toLowerCase() + word.substring(1);
   }
 }
 
-String changeFirstChar(String str, [bool upper = true]) {
-  return (upper ? str[0].toUpperCase() : str[0].toLowerCase()) +
-      str.substring(1);
-}
+String changeFirstChar(String str, [bool upper = true]) => (
+  (upper ? str[0].toUpperCase() : str[0].toLowerCase()) + str.substring(1)
+);
 
 /// convert JSON type to dart type
 String getType(v, Set<String> set, String current) {
@@ -164,9 +163,8 @@ String format(String fmt, List<Object> params) {
     } else {
       throw new Exception('Missing parameter for string format');
     }
-    throw new Exception('Invalid format string: ' + m[0].toString());
+    throw new Exception('Invalid format string: ${m[0].toString()}');
   }
-
   return fmt.replaceAllMapped('%s', replace);
 }
 

@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: Center(
+        child: Form(
           child: Column(
             children: <Widget>[
               Padding(
@@ -44,10 +44,26 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(top: 25),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(height: 55.0),
+                  child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    child: Text('Sign up for GitHub')
+                  )
+                )
+              ),
             ]
           )
         )
       )
     );
   }
+}
+
+void _onLogin() async {
+
 }
