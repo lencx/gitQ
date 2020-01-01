@@ -1,8 +1,8 @@
-import 'package:gitq/models/user.dart';
+// import 'package:gitq/models/user.dart';
 
-class Git {
-}
+// class Git {
+// }
 
-Future<User> Login(String username, String pwd) async {
+// Future<User> Login(String username, String pwd) async {
 
-}
+// }

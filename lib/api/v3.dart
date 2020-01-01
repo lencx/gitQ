@@ -2,6 +2,9 @@
 
 // 'https://api.github.com/graphql'
 
+// https://api.github.com/users/lencx
+// https://api.github.com/users/lencx/repos
+
 
 // Username can't be blank
 // Email can't be blank
