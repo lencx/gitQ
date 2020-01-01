@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gitq/models/profile.dart';
+import 'package:gitq/api/request.dart';
 import 'dart:convert';
 
 // gitQ theme color
@@ -21,15 +22,27 @@ class Global {
   static List<MaterialColor> get themes => _themes;
 
   static Future init() async {
-
+    _prefs = await SharedPreferences.getInstance();
+    var _profile = _prefs.getString('profile');
+    // print(_profile);
+    if (_profile != null) {
+      try {
+        profile = Profile.fromJson(json.decode(_profile));
+        // print(profile is String);
+      } catch (e) {
+        print('init error: $e');
+      }
+    }
+    Git.init();
   }
 
   static saveProfile() {
+    // print('save profile: ${json.encode(profile.toJson())}');
     _prefs.setString('profile', json.encode(profile.toJson()));
   }
 }
 
-class ProfileChangeNotifier extends ChangeNotifier {
+class ProfileNotifier extends ChangeNotifier {
   Profile get _profile => Global.profile;
 
   @override
@@ -39,9 +52,9 @@ class ProfileChangeNotifier extends ChangeNotifier {
   }
 }
 
-class ThemeModel extends ProfileChangeNotifier {
+class ThemeNotifier extends ProfileNotifier {
   ColorSwatch get theme => Global.themes
-    .firstWhere((e) => e.value == _profile.theme, orElse: () => Colors.blue);
+    .firstWhere((e) => e.value == _profile.theme, orElse: () => Colors.orange);
 
   set theme(ColorSwatch color) {
     if (color != theme) {

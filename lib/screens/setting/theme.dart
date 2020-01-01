@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:gitq/common/global.dart';
 import 'package:gitq/layout/pad.dart';
+
 
 class SettingTheme extends StatelessWidget {
   @override
@@ -12,13 +15,15 @@ class SettingTheme extends StatelessWidget {
       body: ListView.builder(
         itemCount: Global.themes.length,
         itemBuilder: (context, idx) {
+          final _theme = Global.themes[idx];
           return GestureDetector(
             child: PadContainer(Container(
-              color: Global.themes[idx],
+              color: _theme,
               height: 40,
             )),
             onTap: () {
-              print(Global.themes[idx]);
+              // print('theme.dart: $_theme');
+              Provider.of<ThemeNotifier>(context, listen: false).theme = _theme;
             },
           );
         },
