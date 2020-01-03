@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:gitq/common/global.dart';
 import 'package:gitq/layout/pad.dart';
 
-
 class SettingTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class SettingTheme extends StatelessWidget {
             )),
             onTap: () {
               // print('theme.dart: $_theme');
-              Provider.of<ThemeNotifier>(context, listen: false).theme = _theme;
+              Provider.of<ThemeModel>(context, listen: false).theme = _theme;
             },
           );
         },

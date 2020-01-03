@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:gitq/models/profile.dart';
-import 'package:gitq/api/request.dart';
 import 'dart:convert';
+
+import 'package:gitq/api/git.dart';
+import 'package:gitq/models/profile.dart';
+import 'package:gitq/models/user.dart';
 
 // gitQ theme color
 const _themes = <MaterialColor>[
@@ -18,13 +20,16 @@ class Global {
   static Profile profile = Profile();
   static const double sidePad = 16.0;
   static const double gutter = 5.0;
+  static const proxy = 'localhost';
+
+  static bool get isRelease => bool.fromEnvironment("dart.vm.product");
 
   static List<MaterialColor> get themes => _themes;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
     var _profile = _prefs.getString('profile');
-    // print(_profile);
+    print(_profile);
     if (_profile != null) {
       try {
         profile = Profile.fromJson(json.decode(_profile));
@@ -52,7 +57,7 @@ class ProfileNotifier extends ChangeNotifier {
   }
 }
 
-class ThemeNotifier extends ProfileNotifier {
+class ThemeModel extends ProfileNotifier {
   ColorSwatch get theme => Global.themes
     .firstWhere((e) => e.value == _profile.theme, orElse: () => Colors.orange);
 
@@ -62,4 +67,14 @@ class ThemeNotifier extends ProfileNotifier {
       notifyListeners();
     }
   }
+}
+
+class UserModel extends ProfileNotifier {
+  // User get user => _profile.user;
+
+  // bool get isLogin => user != null;
+
+  // set user(User user) {
+
+  // }
 }

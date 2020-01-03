@@ -12,21 +12,22 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         // Provider(create: (_) => 'lencx'),
-        // Provider<ThemeNotifier>(create: (_) => ThemeNotifier()),
-        ChangeNotifierProvider.value(value: ThemeNotifier()),
+        // Provider<ThemeModel>(create: (_) => ThemeModel()),
+        ChangeNotifierProvider.value(value: ThemeModel()),
       ],
-      child: Consumer<ThemeNotifier>(
-        builder: (context, themeNotifier, Widget child) {
-          // print("app theme: ${themeNotifier.theme}");
+      child: Consumer<ThemeModel>(
+        builder: (context, themeModel, Widget child) {
+          // print("app theme: ${themeModel.theme}");
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SettingTheme(),
+            // home: SettingTheme(),
+            home: LoginPage(),
             routes: {
               'login': (context) => LoginPage(),
               'setting': (context) => SettingTheme(),
             },
             theme: ThemeData(
-              primarySwatch: themeNotifier.theme,
+              primarySwatch: themeModel.theme,
               // primaryColor: Colors.red,
               appBarTheme: AppBarTheme(
                 textTheme: TextTheme(title: appBarTextStyle),
