@@ -1,4 +1,7 @@
-// import 'package:gitq/models/user.dart';
+/***
+ * @author: lencx
+ * @created_at: Dec 22, 2019
+ **/
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -24,6 +27,7 @@ class Git {
   ));
 
   static void init() {
+    // https://github.com/flutterchina/dio/issues/113
     if (!Global.isRelease) {
       (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
         client.findProxy = (url) {
@@ -54,7 +58,3 @@ class Git {
     return User.fromJson(resp.data);
   }
 }
-
-// Future<User> Login(String username, String pwd) async {
-
-// }

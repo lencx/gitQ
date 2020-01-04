@@ -1,4 +1,7 @@
-/// author: lencx
+/***
+ * @author: lencx
+ * @created_at: Dec 22, 2019
+ **/
 /// jtm: JSON to modles
 import 'dart:convert';
 import 'dart:io';
