@@ -70,11 +70,11 @@ class ThemeModel extends ProfileNotifier {
 }
 
 class UserModel extends ProfileNotifier {
-  // User get user => _profile.user;
+  User get user => _profile.user;
 
-  // bool get isLogin => user != null;
+  bool get isLogin => user != null;
 
-  // set user(User user) {
+  set user(User user) {
 
-  // }
+  }
 }
