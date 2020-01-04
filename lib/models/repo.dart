@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'repos.g.dart';
+part 'repo.g.dart';
 
 @JsonSerializable()
-class Repos {
-  Repos();
+class Repo {
+  Repo();
 
   num id;
 
@@ -224,7 +224,7 @@ class Repos {
 
   Map<String, dynamic> license;
 
-  factory Repos.fromJson(Map<String, dynamic> json) => _$ReposFromJson(json);
+  factory Repo.fromJson(Map<String, dynamic> json) => _$RepoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ReposToJson(this);
+  Map<String, dynamic> toJson() => _$RepoToJson(this);
 }

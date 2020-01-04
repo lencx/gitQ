@@ -9,26 +9,17 @@ import 'dart:convert';
 import 'package:gitq/api/git.dart';
 import 'package:gitq/models/profile.dart';
 import 'package:gitq/models/user.dart';
-
-// gitQ theme color
-const _themes = <MaterialColor>[
-  Colors.lightBlue,
-  Colors.brown,
-  Colors.amber,
-  Colors.pink,
-  Colors.grey,
-];
+import 'style.dart';
 
 class Global {
   static SharedPreferences _prefs;
   static Profile profile = Profile();
-  static const double sidePad = 16.0;
-  static const double gutter = 5.0;
-  static const proxy = 'localhost';
+  static const String appName = 'gitQ';
+  static const String proxy = 'localhost';
 
   static bool get isRelease => bool.fromEnvironment("dart.vm.product");
 
-  static List<MaterialColor> get themes => _themes;
+  static List<MaterialColor> get themes => APP_THEMES;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -57,7 +48,8 @@ class ProfileNotifier extends ChangeNotifier {
   @override
   void notifyListeners() {
     Global.saveProfile();
-    super.notifyListeners(); // update profile
+    // notify dependent widgets for updates
+    super.notifyListeners();
   }
 }
 
@@ -79,6 +71,10 @@ class UserModel extends ProfileNotifier {
   bool get isLogin => user != null;
 
   set user(User user) {
-
+    if (user?.login != _profile.user?.login) {
+      _profile.lastLogin = _profile.user?.login;
+      _profile.user = user;
+      notifyListeners();
+    }
   }
 }

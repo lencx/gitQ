@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'repos.dart';
+part of 'repo.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Repos _$ReposFromJson(Map<String, dynamic> json) {
-  return Repos()
+Repo _$RepoFromJson(Map<String, dynamic> json) {
+  return Repo()
     ..id = json['id'] as num
     ..nodeId = json['node_id'] as String
     ..name = json['name'] as String
@@ -94,7 +94,7 @@ Repos _$ReposFromJson(Map<String, dynamic> json) {
     ..license = json['license'] as Map<String, dynamic>;
 }
 
-Map<String, dynamic> _$ReposToJson(Repos instance) => <String, dynamic>{
+Map<String, dynamic> _$RepoToJson(Repo instance) => <String, dynamic>{
       'id': instance.id,
       'node_id': instance.nodeId,
       'name': instance.name,

@@ -3,9 +3,12 @@
  * @created_at: Dec 19, 2019
  **/
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:gitq/api/git.dart';
+import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
+import 'package:gitq/utils/tools.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,28 +17,35 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey _formKey = GlobalKey<FormState>();
+  Validate _validate = Validate();
   TextEditingController _usernameControl = TextEditingController();
   TextEditingController _pwdControl = TextEditingController();
-  bool pwdShow = false;
+  bool _pwdShow = false;
 
   void _onLogin() async {
-    User user;
     // validate form
     if ((_formKey.currentState as FormState).validate()) {
-      print('login: ${_formKey.currentState}');
+      User user;
+      // print('login: ${_formKey.currentState}');
+      try {
+        user = await Git(context).login(_usernameControl.text, _pwdControl.text);
+        // print('[ok]: $user');
+        Provider.of<UserModel>(context, listen: false).user = user;
+      } catch (e) {
+        if (e.response?.statusCode == 401) {
+          print('Incorrect username or password.');
+        } else {
+          print(e.toString());
+        }
+      } finally {
+        print('end');
+      }
     }
-    try {
-      user = await Git(context).login(_usernameControl.text, _pwdControl.text);
-      print('[ok]: $user');
-    } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('gitQ'),
-      ),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Form(
@@ -45,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: TextFormField(
-                  validator: (val) => validate(val, 'Please enter username'),
+                  validator: (val) => _validate.notEmpty(val, 'Please enter username'),
                   controller: _usernameControl,
                   decoration: InputDecoration(
                     labelText: 'username',
@@ -56,17 +66,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextFormField(
                 controller: _pwdControl,
-                obscureText: !pwdShow,
-                validator: (val) => validate(val, 'Please enter password'),
+                obscureText: !_pwdShow,
+                validator: (val) => _validate.notEmpty(val, 'Please enter password'),
                 decoration: InputDecoration(
                   labelText: 'password',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
-                    icon: Icon(pwdShow ? Icons.visibility : Icons.visibility_off),
+                    icon: Icon(_pwdShow ? Icons.visibility : Icons.visibility_off),
                     onPressed: () {
                       setState(() {
-                        pwdShow = !pwdShow;
+                        _pwdShow = !_pwdShow;
                       });
                     },
                   ),
@@ -92,6 +102,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-String validate(val, errorText) {
-  return val.trim().isNotEmpty ? null : errorText;
-}
+// String validate(String val, String errorText) {
+//   return val.trim().isNotEmpty ? null : errorText;
+// }

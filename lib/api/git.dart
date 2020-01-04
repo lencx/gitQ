@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
+import 'package:gitq/models/repo.dart';
 
 class Git {
   Git([this.context]) {
@@ -43,7 +44,7 @@ class Git {
 
   Future<User> login(String username, String pwd) async {
     String basic = 'Basic ' + base64.encode(utf8.encode('$username:$pwd'));
-    print(basic);
+    // print(basic);
     var resp = await dio.get(
       '/users/$username',
       options: _options.merge(
@@ -54,7 +55,24 @@ class Git {
 
     dio.options.headers[HttpHeaders.authorizationHeader] = basic;
     Global.profile.token = basic;
-    print('login: ${resp.data}');
+    // print('login: ${resp.data}');
     return User.fromJson(resp.data);
+  }
+
+  Future<List<Repo>> repos({
+      Map<String, dynamic> queryParameters,
+      bool refresh = false,
+    }) async {
+      if (refresh) {
+        _options.extra.addAll({ 'refresh': true, 'list': true });
+      }
+
+      var resp = await dio.get<List>(
+        'users/repos',
+        queryParameters: queryParameters,
+        options: _options,
+      );
+
+      return resp.data.map((e) => Repo.fromJson(e)).toList();
   }
 }

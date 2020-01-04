@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'common/style.dart';
 import 'common/global.dart';
-import 'screens/login.dart';
+import 'screens/home.dart';
 import 'screens/setting/theme.dart';
 
 class App extends StatelessWidget {
@@ -18,6 +18,7 @@ class App extends StatelessWidget {
         // Provider(create: (_) => 'lencx'),
         // Provider<ThemeModel>(create: (_) => ThemeModel()),
         ChangeNotifierProvider.value(value: ThemeModel()),
+        ChangeNotifierProvider.value(value: UserModel()),
       ],
       child: Consumer<ThemeModel>(
         builder: (context, themeModel, Widget child) {
@@ -25,9 +26,9 @@ class App extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             // home: SettingTheme(),
-            home: LoginPage(),
+            home: HomePage(),
             routes: {
-              'login': (context) => LoginPage(),
+              // 'login': (context) => LoginPage(),
               'setting': (context) => SettingTheme(),
             },
             theme: ThemeData(
