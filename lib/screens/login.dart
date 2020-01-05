@@ -9,13 +9,14 @@ import 'package:gitq/api/git.dart';
 import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
+import 'package:gitq/widgets/get_avatar.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   GlobalKey _formKey = GlobalKey<FormState>();
   Validate _validate = Validate();
   TextEditingController _usernameControl = TextEditingController();
@@ -47,13 +48,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(top: 50.0),
+                child: getLogo(borderRadius: BorderRadius.circular(16.0)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
                 child: TextFormField(
                   validator: (val) => _validate.notEmpty(val, 'Please enter username'),
                   controller: _usernameControl,
@@ -101,7 +106,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-// String validate(String val, String errorText) {
-//   return val.trim().isNotEmpty ? null : errorText;
-// }

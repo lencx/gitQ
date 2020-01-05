@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'common/style.dart';
 import 'common/global.dart';
-import 'screens/home.dart';
+import 'screens/init.dart';
 import 'screens/setting/theme.dart';
 
 class App extends StatelessWidget {
@@ -26,7 +26,7 @@ class App extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             // home: SettingTheme(),
-            home: HomePage(),
+            home: InitScreen(),
             routes: {
               // 'login': (context) => LoginPage(),
               'setting': (context) => SettingTheme(),
