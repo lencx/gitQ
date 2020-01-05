@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'package:gitq/common/global.dart';
 import 'package:gitq/widgets/drawer.dart';
+import 'package:gitq/widgets/infinite_listview.dart';
 
 import 'login.dart';
 
@@ -25,7 +26,7 @@ class _InitScreenState extends State<InitScreen> {
         title: Text(Global.appName),
       ),
       body: _buildBody(context, userModel),
-      drawer: !userModel.isLogin ? null : gitQDrawer(),
+      drawer: userModel.isLogin ? gitQDrawer() : null,
     );
   }
 }
@@ -34,6 +35,7 @@ Widget _buildBody(BuildContext context, UserModel userModel) {
   if (!userModel.isLogin) {
     return LoginScreen();
   } else {
-    return Text('Github Repos List');
+    // return Text('Github Repos List');
+    return InfiniteListview();
   }
 }
