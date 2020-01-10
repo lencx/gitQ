@@ -32,7 +32,7 @@ class Git {
     if (!Global.isRelease) {
       (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
         client.findProxy = (url) {
-          return 'PROXY ${Global.proxy}:8888';
+          return 'PROXY ${Global.proxy}';
         };
         client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       };
@@ -46,7 +46,7 @@ class Git {
     String basic = 'Basic ' + base64.encode(utf8.encode('$username:$pwd'));
     // print(basic);
     var resp = await dio.get(
-      '/users/$username',
+      '/user/$username',
       options: _options.merge(
         headers: { HttpHeaders.authorizationHeader: basic },
         extra: { 'noCache': true },

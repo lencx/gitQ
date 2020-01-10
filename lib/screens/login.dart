@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:gitq/api/git.dart';
+import 'package:gitq/network/git.dart';
 import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
@@ -44,6 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void showPwd() {
+    setState(() {
+      _pwdShow = !_pwdShow;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,11 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   prefixIcon: Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(_pwdShow ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _pwdShow = !_pwdShow;
-                      });
-                    },
+                    onPressed: showPwd,
                   ),
                 ),
               ),

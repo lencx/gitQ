@@ -22,7 +22,7 @@ Widget getAvatar(String url, {
       width: width,
       height: height,
       imageUrl: url,
-      placeholder: (context, url) => new CircularProgressIndicator(),
+      placeholder: (context, url) => new CircularProgressIndicator(strokeWidth: 1.0),
       errorWidget: (context, url, error) => defaultImage,
     ),
   );

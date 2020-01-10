@@ -6,6 +6,10 @@
 
 // https://api.github.com/users/lencx
 // https://api.github.com/users/lencx/repos
+// https://github.com/settings/applications/new
+// https://developer.github.com/v3/oauth_authorizations
+// https://developer.github.com/v3/#increasing-the-unauthenticated-rate-limit-for-oauth-applications
+// https://developer.github.com/apps/building-oauth-apps/
 
 
 // Username can't be blank
