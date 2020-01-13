@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gitq/common/global.dart';
+import 'package:gitq/config.dart';
 import 'package:gitq/widgets/drawer.dart';
 import 'package:gitq/widgets/infinite_listview.dart';
 
@@ -23,7 +24,7 @@ class _InitScreenState extends State<InitScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(Global.appName),
+        title: Text(Config.APP_NAME),
       ),
       body: _buildBody(context, userModel),
       drawer: userModel.isLogin ? gitQDrawer() : null,

@@ -5,7 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:gitq/network/git.dart';
+// import 'package:gitq/network/git.dart';
+import 'package:gitq/network/github.dart';
 import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
@@ -28,19 +29,21 @@ class _LoginScreenState extends State<LoginScreen> {
     if ((_formKey.currentState as FormState).validate()) {
       User user;
       // print('login: ${_formKey.currentState}');
-      try {
-        user = await Git(context).login(_usernameControl.text, _pwdControl.text);
-        // print('[ok]: $user');
-        Provider.of<UserModel>(context, listen: false).user = user;
-      } catch (e) {
-        if (e.response?.statusCode == 401) {
-          print('Incorrect username or password.');
-        } else {
-          print(e.toString());
-        }
-      } finally {
-        print('end');
-      }
+      user = await Git.login(_usernameControl.text, _pwdControl.text);
+      print('[user]: $user');
+      // try {
+      //   user = await Git(context).login(_usernameControl.text, _pwdControl.text);
+      //   // print('[ok]: $user');
+      //   Provider.of<UserModel>(context, listen: false).user = user;
+      // } catch (e) {
+      //   if (e.response?.statusCode == 401) {
+      //     print('Incorrect username or password.');
+      //   } else {
+      //     print(e.toString());
+      //   }
+      // } finally {
+      //   print('end');
+      // }
     }
   }
 

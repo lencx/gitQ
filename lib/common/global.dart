@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import 'package:gitq/network/git.dart';
+// import 'package:gitq/network/git.dart';
 import 'package:gitq/models/profile.dart';
 import 'package:gitq/models/user.dart';
 import 'style.dart';
@@ -14,10 +14,6 @@ import 'style.dart';
 class Global {
   static SharedPreferences _prefs;
   static Profile profile = Profile();
-  static const String appName = 'gitQ';
-  static const String proxy = 'localhost:8888';
-
-  static bool get isRelease => bool.fromEnvironment("dart.vm.product");
 
   static List<MaterialColor> get themes => APP_THEMES;
 
@@ -33,7 +29,6 @@ class Global {
         print('init error: $e');
       }
     }
-    Git.init();
   }
 
   static saveProfile() {

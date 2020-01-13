@@ -6,18 +6,12 @@ part 'authorizations.g.dart';
 class Authorizations {
   Authorizations();
 
-  @JsonKey(name: "app_name")
-  String appName;
-
   String note;
 
+  @JsonKey(name: "note_url")
+  String noteUrl;
+
   List scopes;
-
-  @JsonKey(name: "client_id")
-  String clientId;
-
-  @JsonKey(name: "client_secret")
-  String clientSecret;
 
   factory Authorizations.fromJson(Map<String, dynamic> json) => _$AuthorizationsFromJson(json);
 

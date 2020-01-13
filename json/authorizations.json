@@ -1,7 +1,5 @@
 {
-  "app_name": "gitQ",
-  "note": "",
-  "scopes": ["user", "repo", "gist"],
-  "client_id": "",
-  "client_secret": ""
+  "note": "gitQ",
+  "note_url": "https://github.com/lencx/gitQ",
+  "scopes": ["user", "repo", "gist"]
 }
