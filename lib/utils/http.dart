@@ -5,11 +5,20 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class GitQHttp extends http.BaseClient {
+class Net extends http.BaseClient {
   final Map<String, String> defaultHeaders;
+  final String baseURL;
   http.Client _httpClient = new http.Client();
+  Encoding _encoding = Encoding.getByName("utf-8");
 
-  GitQHttp({this.defaultHeaders = const {}});
+  Net({this.defaultHeaders = const {}, this.baseURL = ''});
+
+  // String getURL(String url) {
+  //   if (baseURL != null) {
+  //     return '$baseURL$url';
+  //   }
+  //   return url;
+  // }
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
@@ -20,40 +29,54 @@ class GitQHttp extends http.BaseClient {
   @override
   Future<Response> get(url, {Map<String, String> headers}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.get(url, headers: headers);
+    return _httpClient.get(
+      '$baseURL$url',
+      headers: headers,
+    );
   }
 
   @override
-  Future<Response> post(url,
-      {Map<String, String> headers, body, Encoding encoding}) {
+  Future<Response> post(url, {Map<String, String> headers, body, Encoding encoding}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.post(url, headers: headers, encoding: encoding);
+    return _httpClient.post(
+      '$baseURL$url',
+      body: body, headers: headers, encoding: encoding ??_encoding,
+    );
   }
 
   @override
-  Future<Response> patch(url,
-      {Map<String, String> headers, body, Encoding encoding}) {
+  Future<Response> patch(url, {Map<String, String> headers, body, Encoding encoding}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.patch(url, headers: headers, encoding: encoding);
+    return _httpClient.patch(
+      '$baseURL$url',
+      body: body, headers: headers, encoding: encoding ??_encoding,
+    );
   }
 
   @override
-  Future<Response> put(url,
-      {Map<String, String> headers, body, Encoding encoding}) {
+  Future<Response> put(url, {Map<String, String> headers, body, Encoding encoding}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.put(url,
-        headers: headers, body: body, encoding: encoding);
+    return _httpClient.put(
+      '$baseURL$url',
+      headers: headers, body: body, encoding: encoding ??_encoding,
+    );
   }
 
   @override
   Future<Response> head(url, {Map<String, String> headers}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.head(url, headers: headers);
+    return _httpClient.head(
+      '$baseURL$url',
+      headers: headers,
+    );
   }
 
   @override
   Future<Response> delete(url, {Map<String, String> headers}) {
     headers.addAll(defaultHeaders);
-    return _httpClient.delete(url, headers: headers);
+    return _httpClient.delete(
+      '$baseURL$url',
+      headers: headers,
+    );
   }
 }
