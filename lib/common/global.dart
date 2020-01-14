@@ -2,14 +2,13 @@
  * @author: lencx
  * @created_at: Dec 19, 2019
  **/
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
-// import 'package:gitq/network/git.dart';
 import 'package:gitq/models/profile.dart';
 import 'package:gitq/models/user.dart';
-import 'style.dart';
+import 'package:gitq/common/style.dart';
 
 class Global {
   static SharedPreferences _prefs;

@@ -2,12 +2,13 @@
  * @author: lencx
  * @created_at: Dec 19, 2019
  **/
+import 'dart:convert';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 
 import 'package:gitq/network/github.dart';
 // import 'package:gitq/common/global.dart';
-import 'package:gitq/models/user.dart';
+// import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
 import 'package:gitq/widgets/get_avatar.dart';
 
@@ -26,10 +27,13 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onLogin() async {
     // validate form
     if ((_formKey.currentState as FormState).validate()) {
-      User user;
+      // User user;
+      // OauthEntity
       // print('login: ${_formKey.currentState}');
-      user = await Git.login(_usernameControl.text, _pwdControl.text);
-      print('[user]: $user');
+      var info = await Git.login(_usernameControl.text, _pwdControl.text);
+      var user = await Git.getUser(_usernameControl.text);
+      print('[info]: ${info.token}');
+      print('[user]: ${json.encode(user)}');
       // try {
       //   user = await Git(context).login(_usernameControl.text, _pwdControl.text);
       //   // print('[ok]: $user');

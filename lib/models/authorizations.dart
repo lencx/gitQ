@@ -6,9 +6,7 @@ part 'authorizations.g.dart';
 class Authorizations {
   Authorizations();
 
-  String appName;
-
-  String callback;
+  String note;
 
   List scopes;
 

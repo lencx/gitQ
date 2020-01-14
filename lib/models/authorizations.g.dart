@@ -8,8 +8,7 @@ part of 'authorizations.dart';
 
 Authorizations _$AuthorizationsFromJson(Map<String, dynamic> json) {
   return Authorizations()
-    ..appName = json['appName'] as String
-    ..callback = json['callback'] as String
+    ..note = json['note'] as String
     ..scopes = json['scopes'] as List
     ..clientId = json['client_id'] as String
     ..clientSecret = json['client_secret'] as String;
@@ -17,8 +16,7 @@ Authorizations _$AuthorizationsFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$AuthorizationsToJson(Authorizations instance) =>
     <String, dynamic>{
-      'appName': instance.appName,
-      'callback': instance.callback,
+      'note': instance.note,
       'scopes': instance.scopes,
       'client_id': instance.clientId,
       'client_secret': instance.clientSecret,
