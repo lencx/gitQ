@@ -3,11 +3,10 @@
  * @created_at: Dec 19, 2019
  **/
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
-// import 'package:gitq/network/git.dart';
 import 'package:gitq/network/github.dart';
-import 'package:gitq/common/global.dart';
+// import 'package:gitq/common/global.dart';
 import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
 import 'package:gitq/widgets/get_avatar.dart';

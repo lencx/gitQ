@@ -8,7 +8,10 @@ import 'package:gitq/utils/tools.dart';
 
 
 class Git {
-  static final httpClient = Net(baseURL: Config.NET_GITHUB_API);
+  static final httpClient = Net(
+    defaultHeaders: Config.GITHUB_HEAD,
+    baseURL: Config.NET_GITHUB_API
+  );
 
   static Future login(String username, String password) async {
     final _basic = credentialsBasic(username, password);

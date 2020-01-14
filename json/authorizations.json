@@ -1,5 +1,7 @@
 {
-  "note": "gitQ",
-  "note_url": "https://github.com/lencx/gitQ",
-  "scopes": ["user", "repo", "gist"]
+  "appName": "gitQ",
+  "callback": "https://github.com/lencx/gitQ/redirect",
+  "scopes": ["user", "repo", "gist"],
+  "client_id": "",
+  "client_secret": ""
 }

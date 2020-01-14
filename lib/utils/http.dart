@@ -13,13 +13,6 @@ class Net extends http.BaseClient {
 
   Net({this.defaultHeaders = const {}, this.baseURL = ''});
 
-  // String getURL(String url) {
-  //   if (baseURL != null) {
-  //     return '$baseURL$url';
-  //   }
-  //   return url;
-  // }
-
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {
     request.headers.addAll(defaultHeaders);
