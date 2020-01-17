@@ -5,10 +5,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'common/style.dart';
-import 'common/global.dart';
-import 'screens/init.dart';
-import 'screens/setting/theme.dart';
+import 'package:gitq/common/style.dart';
+import 'package:gitq/common/global.dart';
+import 'package:gitq/screens/init.dart';
+import 'package:gitq/screens/setting/theme.dart';
 
 class App extends StatelessWidget {
   @override

@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 
 import 'package:gitq/network/github.dart';
-// import 'package:gitq/common/global.dart';
-// import 'package:gitq/models/user.dart';
 import 'package:gitq/utils/tools.dart';
 import 'package:gitq/widgets/get_avatar.dart';
+// import 'package:gitq/common/global.dart';
+// import 'package:gitq/models/user.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -28,12 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
     // validate form
     if ((_formKey.currentState as FormState).validate()) {
       // User user;
-      // OauthEntity
       // print('login: ${_formKey.currentState}');
-      var info = await Git.login(_usernameControl.text, _pwdControl.text);
-      var user = await Git.getUser(_usernameControl.text);
-      print('[info]: ${info.token}');
-      print('[user]: ${json.encode(user)}');
+      final isLogin = await Git.login(_usernameControl.text, _pwdControl.text);
+      print('[isLogin]: $isLogin');
+      if (isLogin) {
+        final user = await Git.getUser(_usernameControl.text);
+        print('[user]: ${json.encode(user)}');
+      }
       // try {
       //   user = await Git(context).login(_usernameControl.text, _pwdControl.text);
       //   // print('[ok]: $user');
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   constraints: BoxConstraints.expand(height: 55.0),
                   child: RaisedButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () => _onLogin(),
+                    onPressed: _onLogin,
                     textColor: Colors.white,
                     child: Text('Sign up for GitHub')
                   )

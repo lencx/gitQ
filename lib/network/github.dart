@@ -8,25 +8,41 @@ import 'package:gitq/utils/http.dart';
 import 'package:gitq/utils/tools.dart';
 import 'package:gitq/models/oauth.dart';
 import 'package:gitq/models/user.dart';
-
+import 'package:gitq/models/github_error.dart';
 
 class Git {
+  // base config
   static final httpClient = Net(
     defaultHeaders: Config.GITHUB_HEAD,
     baseURL: Config.NET_GITHUB_API,
   );
 
-  static Future<Oauth> login(String username, String password) async {
-    final _basic = credentialsBasic(username, password);
+  static setToken(String token) {
+    httpClient.mergeHead({'Authorization': 'token $token'});
+  }
+
+
+
+  static Future<bool> login(String username, String password) async {
+    String _basic = credentialsBasic(username, password);
     // print(Config.githubAuth());
     Response response = await httpClient.post(
       '/authorizations',
       body: Config.githubAuth(),
       headers: { 'Authorization': _basic },
     );
-    Oauth oauth = Oauth.fromJson(json.decode(response.body));
-    httpClient.mergeHead({'Authorization': 'token ${oauth.token}'});
-    return oauth;
+    int code = response.statusCode;
+    // print(response.statusCode);
+    print(response.body);
+    if (code == 200 || code == 201) {
+      Oauth oauth = Oauth.fromJson(json.decode(response.body));
+      setToken(oauth.token);
+      return true;
+    } else {
+      GithubError _body = GithubError.fromJson(json.decode(response.body));
+      toast(_body.message);
+      return false;
+    }
   }
 
   static Future<User> getUser(String username) async {

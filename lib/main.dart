@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:gitq/common/global.dart';
-import 'app.dart';
+import 'package:gitq/app.dart';
 
 void main() {
   // Provider.debugCheckInvalidValueType = null;
