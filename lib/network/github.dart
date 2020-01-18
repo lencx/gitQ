@@ -1,7 +1,6 @@
 // @author: lencx
 // @create_at: Jan 12, 2020
 import 'dart:convert';
-import 'package:http/http.dart';
 
 import 'package:gitq/config.dart';
 import 'package:gitq/utils/http.dart';
@@ -21,8 +20,6 @@ class Git {
     httpClient.mergeHead({'Authorization': 'token $token'});
   }
 
-
-
   static Future<bool> login(String username, String password) async {
     String _basic = credentialsBasic(username, password);
     // print(Config.githubAuth());
@@ -32,8 +29,7 @@ class Git {
       headers: { 'Authorization': _basic },
     );
     int code = response.statusCode;
-    // print(response.statusCode);
-    print(response.body);
+    /// 200: OK | 201: created
     if (code == 200 || code == 201) {
       Oauth oauth = Oauth.fromJson(json.decode(response.body));
       setToken(oauth.token);
