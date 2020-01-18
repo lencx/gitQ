@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:gitq/config.dart';
-import 'package:gitq/utils/http.dart';
+import 'package:gitq/utils/net.dart';
 import 'package:gitq/utils/tools.dart';
 import 'package:gitq/models/oauth.dart';
 import 'package:gitq/models/user.dart';
